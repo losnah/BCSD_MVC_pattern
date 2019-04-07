@@ -27,39 +27,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-//
-//        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                switch(position){
-//                    case 0 :
-//                        fragment = new NoticeBoardActivity();
-//                        break;
-//                    case 1 :
-//
-//                        break;
-//                    case 2 :
-//
-//                        break;
-//                }
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.linearLayout, fragment);
-//                fragmentTransaction.commit();
-//                drawerLayout.openDrawer(Gravity.LEFT);
-//
-//            }
-//        });
-//
 
-        Button im = (Button)findViewById(R.id.imsiButton);
-        im.setOnClickListener(new View.OnClickListener() {
+        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch(position){
+                    case 0 :
+                        fragment = new NoticeBoardActivity();
+                        break;
+                    case 1 :
+
+                        break;
+                    case 2 :
+
+                        break;
+                }
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.linearLayout, fragment);
+                fragmentTransaction.commit();
                 drawerLayout.openDrawer(Gravity.LEFT);
-                Toast.makeText(getApplicationContext(),"테스트,,,ㅠ",Toast.LENGTH_SHORT).show();
+
             }
         });
+
     }
 
     public void init(){
@@ -69,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerListView = (ListView)findViewById(R.id.activitiy_main_drawer_listview);
         mDrawerListView.setAdapter(adapter);
 
-        //drawerLayout.closeDrawer(Gravity.LEFT);
-        drawerLayout.openDrawer(Gravity.LEFT);
+        drawerLayout.closeDrawer(Gravity.LEFT);
     }
 }
