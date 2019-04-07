@@ -39,14 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case 2 :
-
+                        fragment = new WebViewActivity();
                         break;
                 }
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.linearLayout, fragment);
                 fragmentTransaction.commit();
-                drawerLayout.openDrawer(Gravity.LEFT);
+                drawerLayout.closeDrawer(Gravity.LEFT);
 
             }
         });
