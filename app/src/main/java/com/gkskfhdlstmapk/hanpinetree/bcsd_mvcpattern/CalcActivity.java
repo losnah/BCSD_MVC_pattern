@@ -1,15 +1,21 @@
 package com.gkskfhdlstmapk.hanpinetree.bcsd_mvcpattern;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.StringTokenizer;
 
@@ -27,6 +33,8 @@ public class CalcActivity extends Fragment implements View.OnClickListener {
     private Button mButtonMulti;
     private Button mButtonDiv;
 
+    private String saveResult;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +44,7 @@ public class CalcActivity extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         mView = inflater.inflate(R.layout.activity_calc, null);
-
+        setHasOptionsMenu(true);
         init();
         return mView;
     }
@@ -69,7 +77,57 @@ public class CalcActivity extends Fragment implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_calc,menu);//파라미터로 받은 메뉴에다가 붙여달라.
+    }
 
+    //옵션메뉴가 선택됐을 때 자동으로 호출되는 콜백함수 (메뉴함수 선택 시 )
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //선택된 아이템
+        int curId = item.getItemId();
+        switch (curId){
+            case R.id.menu_save:
+                Toast.makeText(getContext(),"계산 내용을 저장합니다.",Toast.LENGTH_SHORT).show();
+                saveResult = mUpdateTextview.getText().toString();
+                break;
+            case R.id.menu_load:
+                Toast.makeText(getContext(),"계산 내용을 불러옵니다.",Toast.LENGTH_SHORT).show();
+                show();
+                mUpdateText.setLength(0);
+                mUpdateText.append(saveResult);
+                mUpdateTextview.setText(saveResult+"");
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //alertDialog함수
+    void show() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("계산결과");
+        builder.setMessage(saveResult);
+
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "예를 선택했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "아니오를 선택했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                });
+        builder.show();
+    }
+
+
+    //
     public int calculaeResult(StringBuilder str){
 
         StringTokenizer st = new StringTokenizer(str.toString());
