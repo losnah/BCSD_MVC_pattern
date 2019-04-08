@@ -8,9 +8,9 @@
 
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/activity_notice_board_plus_button"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:text="추가" />

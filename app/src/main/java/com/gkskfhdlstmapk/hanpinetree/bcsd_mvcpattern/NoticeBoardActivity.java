@@ -7,10 +7,13 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -21,6 +24,7 @@ public class NoticeBoardActivity extends Fragment {
     private NoticeBoardAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
+    private Button mPlusButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -38,6 +42,7 @@ public class NoticeBoardActivity extends Fragment {
 
     public void init(View view) {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.activity_notice_board_recyclerview);
+        mPlusButton = (Button)view.findViewById(R.id.activity_notice_board_plus_button);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
@@ -53,25 +58,17 @@ public class NoticeBoardActivity extends Fragment {
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+        NoticeBoardItem basic = new NoticeBoardItem("컴퓨터개론","김이름","10시 10분");
+        mNoticeArray.add(basic);
+        mAdapter.notifyDataSetChanged();
 
-        //데이터추가 기능 구현하는 부분! 따로 activity 연결해줄 예정입니다.
-//        Button buttonInsert = (Button)findViewById(R.id.button_main_insert);
-//        buttonInsert.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                count++;
-//
-//                // Dictionary 생성자를 사용하여 ArrayList에 삽입할 데이터를 만듭니다.
-//                Dictionary dict = new Dictionary(count+"",
-//                        "apple" + count, "사과" + count);
-//
-//                //mArrayList.add(0, dict); //RecyclerView의 첫 줄에 삽입
-//                mArrayList.add(dict); // RecyclerView의 마지막 줄에 삽입
-//
-//                mAdapter.notifyDataSetChanged(); //변경된 데이터를 화면에 반영
-//            }
-//        });
+        mPlusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
+
+
 }

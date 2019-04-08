@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new NoticeBoardActivity();
                         break;
                     case 1 :
-
+                        fragment = new CalcActivity();
                         break;
                     case 2 :
                         fragment = new WebViewActivity();
