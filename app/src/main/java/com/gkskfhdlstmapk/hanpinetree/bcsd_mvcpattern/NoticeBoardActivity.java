@@ -1,5 +1,6 @@
 package com.gkskfhdlstmapk.hanpinetree.bcsd_mvcpattern;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,8 @@ public class NoticeBoardActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         mView = inflater.inflate(R.layout.activity_notice_board, null);
         init(mView);
+        setHasOptionsMenu(true);
+
 
         return mView;
     }
@@ -68,6 +72,27 @@ public class NoticeBoardActivity extends Fragment {
 
             }
         });
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+       inflater.inflate(R.menu.menu_main,menu);//파라미터로 받은 메뉴에다가 붙여달라.
+    }
+
+    //옵션메뉴가 선택됐을 때 자동으로 호출되는 콜백함수 (메뉴함수 선택 시 )
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //선택된 아이템
+        int curId = item.getItemId();
+        switch (curId){
+            case R.id.menu_enroll:
+                //Intent intent = new Intent(getApplicationContext(),NoticeEnrollActivity.class);
+                Toast.makeText(getContext(),"글을 작성합니다.",Toast.LENGTH_SHORT).show();
+                //startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
