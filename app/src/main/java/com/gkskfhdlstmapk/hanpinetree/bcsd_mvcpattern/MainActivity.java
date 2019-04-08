@@ -66,31 +66,4 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(Gravity.LEFT);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main,menu);//파라미터로 받은 메뉴에다가 붙여달라.
-//        return true;
-//    }
-//
-//    //옵션메뉴가 선택됐을 때 자동으로 호출되는 콜백함수 (메뉴함수 선택 시 )
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        //선택된 아이템
-//        int curId = item.getItemId();
-//        switch (curId){
-//            case R.id.menu_enroll:
-//                Intent intent = new Intent(getApplicationContext(),NoticeEnrollActivity.class);
-//                Toast.makeText(this,"글을 작성합니다.",Toast.LENGTH_SHORT).show();
-//                startActivity(intent);
-//                break;
-//            case R.id.menu_search:
-//                Toast.makeText(this,"검색 메뉴 클릭됨",Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.menu_settings:
-//                Toast.makeText(this,"옵션 메뉴 클릭됨",Toast.LENGTH_SHORT).show();
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
 }
