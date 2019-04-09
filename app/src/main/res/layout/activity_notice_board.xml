@@ -7,14 +7,6 @@
     tools:context=".NoticeBoardActivity">
 
 
-    <Button
-        android:id="@+id/activity_notice_board_plus_button"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="추가" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_notice_board_recyclerview"
         android:layout_width="match_parent"

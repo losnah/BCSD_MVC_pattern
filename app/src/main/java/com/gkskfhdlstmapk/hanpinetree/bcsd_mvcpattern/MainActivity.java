@@ -31,6 +31,33 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+        Intent intent = getIntent();
+        Toast.makeText(getApplicationContext(),"테스트",Toast.LENGTH_SHORT).show();
+        String title;
+        String name;
+        String time;
+
+        if(intent != null) {
+            NoticeBoardActivity myfragment = new NoticeBoardActivity();
+            Bundle bundle = new Bundle();
+            title = intent.getStringExtra("title");
+            name =  intent.getStringExtra("name");
+            time =  intent.getStringExtra("time");
+
+            bundle.putString("title", title);
+            bundle.putString("name", name);
+            bundle.putString("time", time);
+
+            myfragment.setArguments(bundle);
+
+        }
+        fragment = new NoticeBoardActivity();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.linearLayout, fragment);
+        fragmentTransaction.commit();
+
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

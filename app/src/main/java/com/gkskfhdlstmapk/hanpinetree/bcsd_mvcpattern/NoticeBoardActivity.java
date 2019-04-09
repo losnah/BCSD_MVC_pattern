@@ -26,32 +26,30 @@ public class NoticeBoardActivity extends Fragment {
     private NoticeBoardAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
-    private Button mPlusButton;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        mView = inflater.inflate(R.layout.activity_notice_board, null);
-        init(mView);
-        setHasOptionsMenu(true);
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+            mView = inflater.inflate(R.layout.activity_notice_board, null);
+            init(mView);
+            setHasOptionsMenu(true);
 
-
-        return mView;
-    }
+            return mView;
+        }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_notice_board);
+
+
     }
 
     public void init(View view) {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.activity_notice_board_recyclerview);
-        mPlusButton = (Button)view.findViewById(R.id.activity_notice_board_plus_button);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
          // NoticeBoardActivity에서 RecyclerView의 데이터에 접근시 사용됩니다.
-        mNoticeArray = new ArrayList<NoticeBoardItem>();
+        mNoticeArray = new ArrayList<>();
 
         // RecyclerView를 위해 CustomAdapter를 사용합니다.
         mAdapter = new NoticeBoardAdapter(mNoticeArray);
@@ -62,16 +60,22 @@ public class NoticeBoardActivity extends Fragment {
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        NoticeBoardItem basic = new NoticeBoardItem("컴퓨터개론","김이름","10시 10분");
-        mNoticeArray.add(basic);
+        Bundle extra = this.getArguments();
+
+        if(extra != null) {
+            String title = extra.getString("title");
+            String name = extra.getString("name");
+            String time = extra.getString("time");
+            mNoticeArray.add(new NoticeBoardItem(title, name, time));
+            Toast.makeText(getActivity(),title+name+time,Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getActivity(),"아시바아앙ㄹ ",Toast.LENGTH_SHORT).show();
+        }
+
+        mNoticeArray.add(new NoticeBoardItem("컴퓨터개론","김이름","10시 10분"));
+
         mAdapter.notifyDataSetChanged();
 
-        mPlusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
 
@@ -87,9 +91,9 @@ public class NoticeBoardActivity extends Fragment {
         int curId = item.getItemId();
         switch (curId){
             case R.id.menu_enroll:
-                //Intent intent = new Intent(getApplicationContext(),NoticeEnrollActivity.class);
                 Toast.makeText(getContext(),"글을 작성합니다.",Toast.LENGTH_SHORT).show();
-                //startActivity(intent);
+                Intent intent = new Intent(getActivity(),NoticeEnrollActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
